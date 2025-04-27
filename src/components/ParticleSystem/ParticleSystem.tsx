@@ -2,9 +2,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Particle, { ParticleData } from './Particle';
 
-const PARTICLE_COUNT = 50;
-const CONNECTION_DISTANCE = 100;
-const COLORS = ['#9b87f5', '#D946EF', '#8B5CF6'];
+const PARTICLE_COUNT = 80;
+const CONNECTION_DISTANCE = 150;
+const COLORS = [
+  '#FF61D2', // Bright pink
+  '#FFA6F6', // Light pink
+  '#00FFFF', // Cyan
+  '#00CCFF', // Sky blue
+  '#33CCFF', // Light blue
+  '#4D79FF', // Bright blue
+  '#7D00FF', // Purple
+  '#FF00FF', // Magenta
+  '#FFD700', // Gold
+  '#FF3131', // Red
+];
 
 const ParticleSystem: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,45 +23,55 @@ const ParticleSystem: React.FC = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const animationFrameRef = useRef<number>();
   const mousePosition = useRef({ x: 0, y: 0 });
+  const time = useRef(0);
 
   const initParticles = (width: number, height: number) => {
     return Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      radius: Math.random() * 2 + 2,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)]
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5,
+      radius: Math.random() * 4 + 2,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      pulseSpeed: Math.random() * 2 + 0.5,
+      pulseMagnitude: Math.random() * 0.3 + 0.1
     }));
   };
 
   const updateParticles = () => {
+    time.current += 0.01;
+
     setParticles(prevParticles => {
       return prevParticles.map(particle => {
         let { x, y, vx, vy } = particle;
         
-        // Add mouse interaction
+        // Enhanced mouse interaction
         const dx = mousePosition.current.x - x;
         const dy = mousePosition.current.y - y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 100) {
-          vx += dx * 0.002;
-          vy += dy * 0.002;
+        if (distance < 150) {
+          const force = 0.1 * (1 - distance / 150);
+          vx += dx * force * 0.05;
+          vy += dy * force * 0.05;
         }
+        
+        // Add some natural motion using sine waves
+        vx += Math.sin(time.current + x * 0.01) * 0.01;
+        vy += Math.cos(time.current + y * 0.01) * 0.01;
 
         x += vx;
         y += vy;
 
-        // Bounce off walls
-        if (x < 0 || x > dimensions.width) vx *= -1;
-        if (y < 0 || y > dimensions.height) vy *= -1;
+        // Bounce off walls with improved dynamics
+        if (x < 0 || x > dimensions.width) vx *= -0.8;
+        if (y < 0 || y > dimensions.height) vy *= -0.8;
 
         // Apply boundaries
         x = Math.max(0, Math.min(dimensions.width, x));
         y = Math.max(0, Math.min(dimensions.height, y));
 
-        return { ...particle, x, y, vx: vx * 0.99, vy: vy * 0.99 };
+        return { ...particle, x, y, vx: vx * 0.98, vy: vy * 0.98 };
       });
     });
 
@@ -99,7 +120,7 @@ const ParticleSystem: React.FC = () => {
   return (
     <div 
       ref={containerRef}
-      className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 to-black"
+      className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900"
       onMouseMove={handleMouseMove}
     >
       <svg className="w-full h-full absolute top-0 left-0">
@@ -113,7 +134,8 @@ const ParticleSystem: React.FC = () => {
                   const distance = Math.sqrt(dx * dx + dy * dy);
 
                   if (distance < CONNECTION_DISTANCE) {
-                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.2;
+                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.8;
+                    const gradient = `${particle.color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
                     return (
                       <line
                         key={`${i}-${j}`}
@@ -121,8 +143,9 @@ const ParticleSystem: React.FC = () => {
                         y1={particle.y}
                         x2={other.x}
                         y2={other.y}
-                        stroke={`rgba(155, 135, 245, ${opacity})`}
-                        strokeWidth="1"
+                        stroke={gradient}
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
                       />
                     );
                   }
