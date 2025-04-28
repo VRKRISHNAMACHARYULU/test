@@ -5,43 +5,61 @@ interface SparkleParticle {
   id: number;
   x: number;
   y: number;
+  targetX: number;
+  targetY: number;
   size: number;
   opacity: number;
+  color: string;
 }
 
 const CursorSparkle: React.FC = () => {
   const [sparkles, setSparkles] = useState<SparkleParticle[]>([]);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  const COLORS = [
+    '#9b87f5', // Primary purple
+    '#8B5CF6', // Vivid purple
+    '#D6BCFA', // Light purple
+    '#E5DEFF', // Soft purple
+  ];
+
   useEffect(() => {
     const createSparkle = (x: number, y: number) => ({
       id: Math.random(),
       x: x + (Math.random() - 0.5) * 20,
       y: y + (Math.random() - 0.5) * 20,
-      size: Math.random() * 3 + 1,
-      opacity: 1
+      targetX: x + (Math.random() - 0.5) * 40,
+      targetY: y + (Math.random() - 0.5) * 40,
+      size: Math.random() * 2.5 + 0.5,
+      opacity: 1,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)]
     });
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
-      if (Math.random() > 0.5) { // Only create sparkles 50% of the time for performance
+      if (Math.random() > 0.6) { // Reduced particle creation rate
         setSparkles(prev => [...prev, createSparkle(e.clientX, e.clientY)]);
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-
-    const fadeInterval = setInterval(() => {
+    const animationFrame = setInterval(() => {
       setSparkles(prev => 
         prev
-          .map(sparkle => ({ ...sparkle, opacity: sparkle.opacity - 0.05 }))
+          .map(sparkle => ({
+            ...sparkle,
+            x: sparkle.x + (sparkle.targetX - sparkle.x) * 0.1,
+            y: sparkle.y + (sparkle.targetY - sparkle.y) * 0.1,
+            opacity: sparkle.opacity - 0.02
+          }))
           .filter(sparkle => sparkle.opacity > 0)
       );
-    }, 50);
+    }, 16); // ~60fps for smooth animation
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(fadeInterval);
+      clearInterval(animationFrame);
     };
   }, []);
 
@@ -56,10 +74,10 @@ const CursorSparkle: React.FC = () => {
           cx={sparkle.x}
           cy={sparkle.y}
           r={sparkle.size}
-          fill="#FFD700"
+          fill={sparkle.color}
           opacity={sparkle.opacity}
           style={{
-            filter: `drop-shadow(0 0 ${sparkle.size}px #FFD700)`
+            filter: `drop-shadow(0 0 ${sparkle.size * 2}px ${sparkle.color})`
           }}
         />
       ))}
