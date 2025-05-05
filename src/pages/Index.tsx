@@ -14,6 +14,7 @@ const Index = () => {
   const fullName = "V R KRISHNAMACHARYULU";
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
+  const [hoveredImage, setHoveredImage] = useState(false);
 
   useEffect(() => {
     if (typing) {
@@ -51,11 +52,15 @@ const Index = () => {
         <Navbar />
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)]">
           <div className="flex flex-col items-center justify-center p-4">
-            <div className="w-64 h-64 rounded-full border-4 border-purple-500/30 overflow-hidden mb-8">
+            <div 
+              className="w-64 h-64 rounded-full border-4 border-purple-500/30 overflow-hidden mb-8 cursor-pointer transition-all duration-300"
+              onMouseEnter={() => setHoveredImage(true)}
+              onMouseLeave={() => setHoveredImage(false)}
+            >
               <img 
-                src="/lovable-uploads/41cb53ff-f1bb-41f9-a103-83b297a67c60.png" 
+                src={hoveredImage ? "/lovable-uploads/e4d4606c-73b4-47ec-908c-5486d7cbf584.png" : "/lovable-uploads/41cb53ff-f1bb-41f9-a103-83b297a67c60.png"} 
                 alt="Profile"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-opacity duration-300"
               />
             </div>
             
@@ -72,7 +77,7 @@ const Index = () => {
                 Cloud & DevOps Engineer
               </p>
               
-              <div className="flex gap-4 mt-8">
+              <div className="flex gap-4 mt-8 relative z-20">
                 <Button variant="default" className="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 hover:opacity-90 transition-all">
                   <a href="/resume.pdf" download className="flex items-center gap-2">
                     <Download size={16} /> Download Resume

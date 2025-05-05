@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Particle, { ParticleData } from './Particle';
 
-const PARTICLE_COUNT = 80;
+const PARTICLE_COUNT = 60; // Reduced from 80
 const CONNECTION_DISTANCE = 150;
 const COLORS = [
   '#FF61D2', // Bright pink
@@ -31,7 +31,7 @@ const ParticleSystem: React.FC = () => {
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 1.5,
       vy: (Math.random() - 0.5) * 1.5,
-      radius: Math.random() * 4 + 2,
+      radius: Math.random() * 3 + 1, // Reduced size
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
       pulseSpeed: Math.random() * 2 + 0.5,
       pulseMagnitude: Math.random() * 0.3 + 0.1
@@ -123,7 +123,7 @@ const ParticleSystem: React.FC = () => {
       className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900"
       onMouseMove={handleMouseMove}
     >
-      <svg className="w-full h-full absolute top-0 left-0">
+      <svg className="w-full h-full absolute top-0 left-0 opacity-70"> {/* Reduced opacity */}
         <g>
           {particles.map((particle, i) => (
             <React.Fragment key={i}>
@@ -134,7 +134,7 @@ const ParticleSystem: React.FC = () => {
                   const distance = Math.sqrt(dx * dx + dy * dy);
 
                   if (distance < CONNECTION_DISTANCE) {
-                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.8;
+                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.6; // Reduced from 0.8
                     const gradient = `${particle.color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
                     return (
                       <line
@@ -144,7 +144,7 @@ const ParticleSystem: React.FC = () => {
                         x2={other.x}
                         y2={other.y}
                         stroke={gradient}
-                        strokeWidth={1.5}
+                        strokeWidth={1}
                         strokeLinecap="round"
                       />
                     );

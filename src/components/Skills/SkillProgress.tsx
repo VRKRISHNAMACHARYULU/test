@@ -8,11 +8,12 @@ interface SkillProgressProps {
 
 const SkillProgress: React.FC<SkillProgressProps> = ({ name, percent }) => {
   return (
-    <div className="bg-black/30 backdrop-blur-lg p-6 rounded-xl border border-purple-500/20">
+    <div className="bg-black/70 backdrop-blur-lg p-6 rounded-xl border border-purple-500/30 shadow-lg hover:shadow-purple-500/20 hover:border-purple-500/50 transition-all">
       <div className="flex justify-between items-center mb-2">
-        <h4 className="text-white text-lg">{name}</h4>
+        <h4 className="text-white text-lg font-semibold">{name}</h4>
+        <span className="text-cyan-400 font-medium">{percent}%</span>
       </div>
-      <div className="h-3 w-full bg-gray-800 rounded-full overflow-hidden">
+      <div className="h-3 w-full bg-gray-800/80 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${percent}%` }}
