@@ -70,9 +70,11 @@ const Index = () => {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <h1 className="text-gradient-animate text-4xl md:text-6xl font-bold mb-6">
-                {text}<span className="animate-pulse">|</span>
-              </h1>
+              <div className="mb-6">
+                <h1 className="text-gradient-animate text-4xl md:text-6xl font-bold">
+                  {text}<span className="animate-pulse">|</span>
+                </h1>
+              </div>
               <p className="text-xl text-white/80 drop-shadow-md mb-8">
                 Cloud & DevOps Engineer
               </p>
