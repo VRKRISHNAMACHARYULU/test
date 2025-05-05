@@ -91,11 +91,11 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: black;
+    background-color: black !important;
   }
 
   #root {
     min-height: 100vh;
-    background-color: black;
+    background-color: black !important;
   }
 }

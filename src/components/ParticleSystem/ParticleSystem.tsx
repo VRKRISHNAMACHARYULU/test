@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Particle, { ParticleData } from './Particle';
 
-const PARTICLE_COUNT = 60; // Reduced from 80
-const CONNECTION_DISTANCE = 150;
+const PARTICLE_COUNT = 90; // Increased for more particles
+const CONNECTION_DISTANCE = 180; // Increased connection distance
 const COLORS = [
   '#FF61D2', // Bright pink
   '#FFA6F6', // Light pink
@@ -29,9 +29,9 @@ const ParticleSystem: React.FC = () => {
     return Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 1.5,
-      vy: (Math.random() - 0.5) * 1.5,
-      radius: Math.random() * 3 + 1, // Reduced size
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: (Math.random() - 0.5) * 1.2,
+      radius: Math.random() * 3 + 1, // Suitable particle size
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
       pulseSpeed: Math.random() * 2 + 0.5,
       pulseMagnitude: Math.random() * 0.3 + 0.1
@@ -51,7 +51,7 @@ const ParticleSystem: React.FC = () => {
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < 150) {
-          const force = 0.1 * (1 - distance / 150);
+          const force = 0.15 * (1 - distance / 150); // Increased force
           vx += dx * force * 0.05;
           vy += dy * force * 0.05;
         }
@@ -120,10 +120,10 @@ const ParticleSystem: React.FC = () => {
   return (
     <div 
       ref={containerRef}
-      className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900"
+      className="w-full h-screen fixed top-0 left-0 overflow-hidden bg-black"
       onMouseMove={handleMouseMove}
     >
-      <svg className="w-full h-full absolute top-0 left-0 opacity-70"> {/* Reduced opacity */}
+      <svg className="w-full h-full absolute top-0 left-0 opacity-80">
         <g>
           {particles.map((particle, i) => (
             <React.Fragment key={i}>
@@ -134,7 +134,7 @@ const ParticleSystem: React.FC = () => {
                   const distance = Math.sqrt(dx * dx + dy * dy);
 
                   if (distance < CONNECTION_DISTANCE) {
-                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.6; // Reduced from 0.8
+                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.5;
                     const gradient = `${particle.color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
                     return (
                       <line
