@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticleSystem from '../components/ParticleSystem/ParticleSystem';
@@ -44,6 +43,20 @@ const Index = () => {
     }
   }, [index, typing]);
 
+  // Animation variants for elements sliding from left
+  const slideFromLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: (custom) => ({
+      x: 0,
+      opacity: 1,
+      transition: { 
+        duration: 0.6, 
+        ease: "easeOut",
+        delay: custom * 0.2 // Staggered delay
+      }
+    })
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <ParticleSystem />
@@ -52,44 +65,44 @@ const Index = () => {
         <Navbar />
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)]">
           <div className="flex flex-col items-center justify-center p-4">
-            <div 
+            <div
               className="w-64 h-64 rounded-full border-4 border-purple-500/30 overflow-hidden mb-8 cursor-pointer transition-all duration-300"
               onMouseEnter={() => setHoveredImage(true)}
               onMouseLeave={() => setHoveredImage(false)}
             >
-              <img 
-                src={hoveredImage ?  "/images/profile1.jpg" : "/images/profile2.jpg"} 
+              <img
+                src={hoveredImage ? "/images/profile1.jpg" : "/images/profile2.jpg"}
                 alt="Profile"
                 className="w-full h-full object-cover transition-opacity duration-300"
               />
             </div>
-            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center"
+              className="text-center w-full"
             >
-              <div className="mb-6">
+              {/* Fixed height container with no overflow for the name animation */}
+              <div className="mb-6 h-24 flex items-center justify-center"> 
                 <h1 className="text-gradient-animate text-4xl md:text-6xl font-bold">
                   {text}<span className="animate-pulse">|</span>
                 </h1>
               </div>
+              
               <p className="text-xl text-white/80 drop-shadow-md mb-8">
                 Cloud & DevOps Engineer
               </p>
               
-              <div className="flex gap-4 mt-8 relative z-20">
+              {/* Buttons in a separate container with fixed positioning */}
+              <div className="flex gap-4 mt-8 justify-center">
                 <Button variant="default" className="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 hover:opacity-90 transition-all">
                   <a href="/resume.pdf" download className="flex items-center gap-2">
                     <Download size={16} /> Download Resume
                   </a>
                 </Button>
                 <Button variant="outline" className="border-purple-500 text-white hover:bg-purple-500/20">
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                  View Resume
-                </a>
-                </Button> 
+                  <Link to="/contact">View Resume</Link>
+                </Button>
               </div>
             </motion.div>
           </div>

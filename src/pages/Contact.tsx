@@ -84,7 +84,7 @@ const Contact = () => {
                 <div className="flex items-center space-x-4">
                   <Phone className="text-purple-500" size={24} />
                   <a href="tel:+916300547936" className="text-white hover:text-cyan-400 transition-colors">
-                    +91 63005 47936
+                    +91 6300547936
                   </a>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -95,7 +95,7 @@ const Contact = () => {
 
               <div className="flex space-x-4 mt-8">
                 <a 
-                  href="https://linkedin.com/" 
+                  href="https://www.linkedin.com/in/vr-krishnamacharyulu-periyala-39b7a1314/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-black/30 backdrop-blur-lg rounded-full flex items-center justify-center border border-purple-500/20 hover:border-purple-500 transition-all"
@@ -103,7 +103,7 @@ const Contact = () => {
                   <Linkedin className="text-white" size={20} />
                 </a>
                 <a 
-                  href="https://github.com/" 
+                  href="https://github.com/VRKRISHNAMACHARYULU" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-black/30 backdrop-blur-lg rounded-full flex items-center justify-center border border-purple-500/20 hover:border-purple-500 transition-all"
@@ -111,7 +111,7 @@ const Contact = () => {
                   <Github className="text-white" size={20} />
                 </a>
                 <a 
-                  href="https://instagram.com/" 
+                  href="https://www.instagram.com/_raghu_nandan_20?igsh=MnYyeTB6djRlaHl0" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-black/30 backdrop-blur-lg rounded-full flex items-center justify-center border border-purple-500/20 hover:border-purple-500 transition-all"
