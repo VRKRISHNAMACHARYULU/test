@@ -10,23 +10,23 @@ const About = () => {
   const codingProfiles = [
     { 
       name: 'HackerRank', 
-      logo: '/lovable-uploads/6ff747eb-e4b5-4255-91d4-e5b2d30eebac.png',
-      url: 'https://www.hackerrank.com/' 
+      logo: '/images/hacker rank.png',
+      url: 'https://www.hackerrank.com/profile/raghuperiyala201' 
     },
     { 
       name: 'CodeChef', 
-      logo: '/lovable-uploads/ee34f0eb-a4a1-4431-b8e6-2df16512ba70.png',
-      url: 'https://www.codechef.com/' 
+      logo: '/images/codechef.jpg',
+      url: 'https://www.codechef.com/users/krishna_20_03' 
     },
     { 
       name: 'GFG', 
-      logo: '/lovable-uploads/efacd2b2-9da1-4ada-a825-5f8991c9f107.png',
-      url: 'https://www.geeksforgeeks.org/' 
+      logo: '/images/gfg.jpg',
+      url: 'https://www.geeksforgeeks.org/user/krishna_20_03/' 
     },
     { 
       name: 'LeetCode', 
-      logo: '/lovable-uploads/cc5d7c93-517e-4e7b-938f-fedfd32f6b96.png',
-      url: 'https://leetcode.com/' 
+      logo: '/images/leetcode.png',
+      url: 'https://leetcode.com/u/KRISHNAMACHARYULU_20/' 
     }
   ];
 
@@ -66,7 +66,7 @@ const About = () => {
                 Cloud and DevOps Engineer with experience designing scalable cloud infrastructure and automating deployment pipelines, accelerating deployment by 45%. Optimized system performance by implementing efficient data structures and algorithms in C++. Skilled in AWS, Terraform, Docker, and Kubernetes to streamline cloud operations and enhance system efficiency.
               </p>
 
-              <div className="flex flex-wrap gap-4 justify-center mt-8">
+              {/* <div className="flex flex-wrap gap-4 justify-center mt-8">
                 <Button variant="outline" size="lg" className="border-purple-500 text-white">
                   <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Linkedin size={18} /> LinkedIn
@@ -77,7 +77,7 @@ const About = () => {
                     <Github size={18} /> GitHub
                   </a>
                 </Button>
-              </div>
+              </div> */}
             </motion.div>
 
             <motion.div 

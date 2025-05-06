@@ -58,7 +58,7 @@ const Index = () => {
               onMouseLeave={() => setHoveredImage(false)}
             >
               <img 
-                src={hoveredImage ? "/lovable-uploads/e4d4606c-73b4-47ec-908c-5486d7cbf584.png" : "/lovable-uploads/41cb53ff-f1bb-41f9-a103-83b297a67c60.png"} 
+                src={hoveredImage ?  "/images/profile1.jpg" : "/images/profile2.jpg"} 
                 alt="Profile"
                 className="w-full h-full object-cover transition-opacity duration-300"
               />
@@ -86,8 +86,10 @@ const Index = () => {
                   </a>
                 </Button>
                 <Button variant="outline" className="border-purple-500 text-white hover:bg-purple-500/20">
-                  <Link to="/contact">View Resume</Link>
-                </Button>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                  View Resume
+                </a>
+                </Button> 
               </div>
             </motion.div>
           </div>

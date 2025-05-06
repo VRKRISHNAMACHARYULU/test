@@ -13,8 +13,8 @@ const Projects = () => {
       additionalInfo: "Configured 10+ servers, enhanced security settings, and improved website performance by reducing downtime by 30%.",
       technologies: ["AWS", "EC2", "RDS", "S3"],
       links: {
-        demo: "#",
-        github: "#"
+      demo: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7225744288490405888?collapsed=1", 
+      github: "https://github.com/VRKRISHNAMACHARYULU/Iship"
       }
     },
     {
@@ -23,8 +23,8 @@ const Projects = () => {
       additionalInfo: "Wrote Jenkins pipelines for CI/CD automation, provisioned infrastructure using Terraform, containerized applications with Docker, and orchestrated deployments with Kubernetes, ensuring efficient and reliable deployment workflows.",
       technologies: ["Jenkins", "Terraform", "Kubernetes", "Docker"],
       links: {
-        demo: "#",
-        github: "#"
+        demo: "https://www.linkedin.com/posts/vr-krishnamacharyulu-periyala-39b7a1314_automation-devops-java-activity-7319185492938305536-WZIh",
+      github: "https://github.com/VRKRISHNAMACHARYULU/CI-CD.git"
       }
     },
     {
@@ -33,8 +33,8 @@ const Projects = () => {
       additionalInfo: "Configured an Event Bridge (Cloud Watch Events) rule to trigger the Lambda function every 24 hours, ensuring regular cleanup. Reduced manual intervention by 100%, automating the cleanup process for stale data and optimized S3 storage costs, achieving an estimated 20-30% reduction in unnecessary storage expenses.",
       technologies: ["AWS Lambda", "S3", "EventBridge", "CloudWatch"],
       links: {
-        demo: "#",
-        github: "#"
+        demo: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7315367812082847746?collapsed=1",
+      github: "https://github.com/VRKRISHNAMACHARYULU/lambda.git"
       }
     }
   ];

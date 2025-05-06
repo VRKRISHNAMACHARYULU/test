@@ -8,11 +8,14 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false, // Changed to false because we're emitting
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": true, // Keep as true to satisfy project requirements
     "jsx": "react-jsx",
+
+    /* Required for project references */
+    "composite": true, // Enable incremental builds
 
     /* Linting */
     "strict": false,
@@ -26,5 +29,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/types"]
 }
